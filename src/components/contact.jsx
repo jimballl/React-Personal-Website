@@ -9,6 +9,7 @@ const initialState = {
 };
 export const Contact = (props) => {
   const [{ name, email, message }, setState] = useState(initialState);
+  const [formKey, setFormKey] = useState(0); // Add this line
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -20,15 +21,21 @@ export const Contact = (props) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(name, email, message);
-    
-    {/* replace below with your own Service ID, Template ID and Public Key from your EmailJS account */ }
-    
+  
+    // Check if message has at least 20 words
+    const wordCount = message.split(' ').filter(word => word).length;
+    if (wordCount < 20) {
+      alert('Your message should contain at least 20 words.');
+      return;
+    }
+
     emailjs
-      .sendForm("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", e.target, "YOUR_PUBLIC_KEY")
+      .sendForm("default_service", "template_85vrz8y", e.target, "tJrXxXw820OWp169G")
       .then(
         (result) => {
           console.log(result.text);
           clearState();
+          setFormKey(formKey + 1); // force a re-render
         },
         (error) => {
           console.log(error.text);
@@ -42,10 +49,9 @@ export const Contact = (props) => {
           <div className="col-md-8">
             <div className="row">
               <div className="section-title">
-                <h2>Get In Touch</h2>
+                <h2>Contact Me Here</h2>
                 <p>
-                  Please fill out the form below to send us an email and we will
-                  get back to you as soon as possible.
+                  Fill out the form below and I will reach out to you soon!
                 </p>
               </div>
               <form name="sentMessage" validate onSubmit={handleSubmit}>
@@ -60,6 +66,7 @@ export const Contact = (props) => {
                         placeholder="Name"
                         required
                         onChange={handleChange}
+                        value={name}
                       />
                       <p className="help-block text-danger"></p>
                     </div>
@@ -74,6 +81,7 @@ export const Contact = (props) => {
                         placeholder="Email"
                         required
                         onChange={handleChange}
+                        value={email}
                       />
                       <p className="help-block text-danger"></p>
                     </div>
@@ -85,9 +93,10 @@ export const Contact = (props) => {
                     id="message"
                     className="form-control"
                     rows="4"
-                    placeholder="Message"
+                    placeholder="Message (20 words minimum)"
                     required
                     onChange={handleChange}
+                    value={message}
                   ></textarea>
                   <p className="help-block text-danger"></p>
                 </div>
@@ -101,61 +110,49 @@ export const Contact = (props) => {
           <div className="col-md-3 col-md-offset-1 contact-info">
             <div className="contact-item">
               <h3>Contact Info</h3>
-              <p>
+              {/* <p>
                 <span>
                   <i className="fa fa-map-marker"></i> Address
                 </span>
                 {props.data ? props.data.address : "loading"}
-              </p>
-            </div>
-            <div className="contact-item">
-              <p>
-                <span>
-                  <i className="fa fa-phone"></i> Phone
-                </span>{" "}
-                {props.data ? props.data.phone : "loading"}
-              </p>
+              </p> */}
             </div>
             <div className="contact-item">
               <p>
                 <span>
                   <i className="fa fa-envelope-o"></i> Email
                 </span>{" "}
-                {props.data ? props.data.email : "loading"}
+                {props.data ? <a href={`mailto:${props.data.email}`} style={{color: 'inherit'}}>{props.data.email}</a> : "loading"}
               </p>
             </div>
-          </div>
-          <div className="col-md-12">
-            <div className="row">
-              <div className="social">
-                <ul>
-                  <li>
-                    <a href={props.data ? props.data.facebook : "/"}>
-                      <i className="fa fa-facebook"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href={props.data ? props.data.twitter : "/"}>
-                      <i className="fa fa-twitter"></i>
-                    </a>
-                  </li>
-                  <li>
-                    <a href={props.data ? props.data.youtube : "/"}>
-                      <i className="fa fa-youtube"></i>
-                    </a>
-                  </li>
-                </ul>
-              </div>
+            <div className="contact-item">
+              <p>
+                <span>
+                  <i className="fa fa-linkedin"></i> LinkedIn
+                </span>{" "}
+                {props.data ? <a href={`https://${props.data.LinkedIn}`} target="_blank" rel="noopener noreferrer" style={{color: 'inherit'}}>{props.data.LinkedIn}</a> : "loading"}
+              </p>
             </div>
+            <div className="contact-item">
+            <p>
+              <span>
+                <i className="fa fa-github"></i> GitHub
+              </span>{" "}
+              {props.data ? <a href={`https://${props.data.GitHub}`} target="_blank" rel="noopener noreferrer" style={{color: 'inherit'}}>{props.data.GitHub}</a> : "loading"}
+            </p>
+          </div>
           </div>
         </div>
       </div>
       <div id="footer">
         <div className="container text-center">
           <p>
-            &copy; 2023 Issaaf Kattan React Land Page Template. Design by{" "}
-            <a href="http://www.templatewire.com" rel="nofollow">
-              TemplateWire
+            Website design built off of Issaaf Kattan's React Land Page Template. {" "}
+            <a href="https://github.com/issaafalkattan/React-Landing-Page-Template?tab=readme-ov-file" rel="nofollow">
+              See Original Code Here
+            </a> {" and "}
+            <a href="https://github.com/jimballl/Personal-Website" rel="nofollow">
+              See My Code Here.
             </a>
           </p>
         </div>

@@ -8,8 +8,7 @@ export const Gallery = (props) => {
         <div className="section-title">
           <h2>Gallery</h2>
           <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit duis sed
-            dapibus leonec.
+            GitHub repos listed below. Click on the images to view more!
           </p>
         </div>
         <div className="row">
@@ -22,7 +21,7 @@ export const Gallery = (props) => {
                   >
                     <Image
                       title={d.title}
-                      largeImage={d.largeImage}
+                      hyperlink={d.hyperlink}
                       smallImage={d.smallImage}
                     />
                   </div>
