@@ -133,14 +133,14 @@ export const Contact = (props) => {
                 {props.data ? <a href={`https://${props.data.LinkedIn}`} target="_blank" rel="noopener noreferrer" style={{color: 'inherit'}}>{props.data.LinkedIn}</a> : "loading"}
               </p>
             </div>
-            <div className="contact-item">
+            {/* <div className="contact-item">
             <p>
               <span>
                 <i className="fa fa-github"></i> GitHub
               </span>{" "}
               {props.data ? <a href={`https://${props.data.GitHub}`} target="_blank" rel="noopener noreferrer" style={{color: 'inherit'}}>{props.data.GitHub}</a> : "loading"}
             </p>
-          </div>
+          </div> */}
           </div>
         </div>
       </div>
@@ -151,7 +151,7 @@ export const Contact = (props) => {
             <a href="https://github.com/issaafalkattan/React-Landing-Page-Template?tab=readme-ov-file" rel="nofollow">
               See Original Code Here
             </a> {" and "}
-            <a href="https://github.com/jimballl/Personal-Website" rel="nofollow">
+            <a href="https://github.com/jimballl/React-Personal-Website" rel="nofollow">
               See My Code Here.
             </a>
           </p>
