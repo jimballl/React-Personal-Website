@@ -1,4 +1,4 @@
-Website can be accessed via the following link: https://www.jasper-kimball.com/
+Website can be accessed via the following link: [https://jimballl.github.io/React-Personal-Website/]
 
 
 ### To Run locally:
